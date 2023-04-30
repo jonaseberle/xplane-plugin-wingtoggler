@@ -128,6 +128,7 @@ That means that you need a configured wing variant for each flap position you wa
 
 #### source.dataRef.name
 This is the input DataRef. Its value is what drives the "detents" below.
+
 We assume that this is the flaps deflection, but it could be something else that profits from switchable
 "wings", for example a "flying in the rain" DataRef.
 
@@ -139,7 +140,7 @@ This controls how we apply the active detent(s) to X-Plane.
 
 applyMode can be either of the follwing:
 
-##### applyModes.CHANGE_SEMILEN
+##### `applyModes.CHANGE_SEMILEN`
 We change the length (semilen) of each wing segment. With semilen=0 a wing is aerodynamically not active for X-Plane.
 
 The idea was to splice together a wing dynamically from multiple segments so that the parts are interweaving when we
@@ -152,7 +153,7 @@ Anyways: These wings will actually become active: make sure to set all geometric
 
 Current state: This works well with `sourceModes.SWITCH`.
 
-##### applyModes.SET_AFL
+##### `applyModes.SET_AFL`
 We copy the airfoil of the active wing(s) from the "detents" to the target.
 
 On aircraft load, we will first use CHANGE_SEMILEN to deactivate all wings that are used in `detents`.`...`.`segments`.
@@ -162,35 +163,42 @@ and apply it to the target wings.
 
 Configuration: See `SET_AFL_settings` below.
 
-Limitations: The wings we work on as sources or targets need to
-* only have 1 Re number variant in the airfoil (or you risk that the others are not updated, maybe they are also deleted. Nobody knows. Here be dragons.)
-* not use the tip airfoil (only root/mid are possible) - a workaround might be to select
+Limitations: The wings we work on as sources or targets need to...
+
+* ... only have 1 Re number variant in the airfoil (or you risk that the others are not updated, maybe they are also deleted. Nobody knows. Here be dragons.)
+* ... not use the tip airfoil (only root/mid are possible) - a workaround might be to select
   "use midfoil inboard: 1.0" in Plane Maker but this has not been tested well yet.
 
 These limitations come from what is exposed in the DataRefs.
 
 Current state: If you are fine with the limitations, this seems to work well with `sourceModes.SWITCH` and `sourceModes.INTERPOLATE`.
 
-#### apply.SET_AFL_settings.targetSegments: {}
-Add this when using `applyModes.SET_AFL`: It defines which wings' airfoils get changed.
+#### apply.SET_AFL_settings.targetSegments: {`<list of wing IDs>`}
+
+Add this when using `applyModes.SET_AFL`: It defines which wings' airfoils get changed. See the list below for X-Plane wing IDs.
+
 The order is important: The first one in here is set from the first one in `detents`.`<sourceValue>`.`segments` and so on.
 
-#### detents: { sourceValue => detent }
+#### detents: { sourceValue => `<detent configuration>` }
 
 These are the configurations by input value: If the source DataRef has this value, this configuration will
 be active. In animation terms these are "key frames".
+
 The values do not have to be exact flap handle positions.
-In `sourceModes.INTERPOLATE` intermediate positions will linearly be assigned with a weight, in `sourceModes.SWITCH` only the closest position
+
+In `sourceModes.INTERPOLATE` mode intermediate positions will linearly be assigned with a weight, in `sourceModes.SWITCH` only the closest position
 will be active.
+
 The current state is written to Log.txt with log level NOTICE and higher (see "Debugging" below).
 
-#### detents.<sourceValue>.name
+#### detents.`<sourceValue>`.name
 Give it a name. It is used in the log output.
 
-#### detents.<sourceValue>.segments: {}
+#### detents.`<sourceValue>`.segments: {`<list of wing IDs>`}
 This is a list of X-Plane wing segments IDs (usually at least 2 for left and right wing) that will be
 active when this configuration is active.
-See the table below for Plane Maker -> X-Plane segment ID.
+
+See the list below for X-Plane wing IDs.
 
 
 
