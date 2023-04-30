@@ -57,7 +57,7 @@ You can use the convenience function `acfFileName()` in that file to check for t
 Example:
 ```Lua
 if acfFileName() == 'Pik-20D.acf' then
-    setPlaneConfiguration(...)
+    configure(<configuration>)
 end
 ```
 
