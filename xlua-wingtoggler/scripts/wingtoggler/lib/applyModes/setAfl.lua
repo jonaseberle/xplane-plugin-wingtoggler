@@ -170,14 +170,14 @@ local function do_apply(activeDetentRatios)
                             local source_idx = afl_idx(sourceSegment, airfoil_idx, side_idx, alpha_idx)
                             local _value = acf.afl[coefficient_type][source_idx]
                             if isLog then
-                                log(string.format('(%3d%%) [%s] == %s', ratio * 100, sourceSegment, _value))
+                                log(string.format('(%3d%%) [%2d] == %f', ratio * 100, sourceSegment, _value))
                             end
                             value = value + _value * ratio
                             count = count + 1
                         end
 
-                        if isDebug then
-                            log(string.format('%s[%s] = %s', aflCoefficient_idx, aflIdxToStr(target_idx), value))
+                        if isLog then
+                            log(string.format('%s[%s] = %f', aflCoefficient_idx, aflIdxToStr(target_idx), value))
                         end
                         afl[aflCoefficient_idx][target_idx] = value
                     end
