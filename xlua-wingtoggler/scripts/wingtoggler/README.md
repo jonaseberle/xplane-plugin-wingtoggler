@@ -54,7 +54,7 @@ Use it with the wonderful [Pik-20D by danhopgood1](https://forums.x-plane.org/in
 * Copy this plugin (the folder `xlua-wingtoggler/`) into the `<Aircraft>/plugins/` folder.
 * Open `Pik-20D.acf` in Plane Maker.
 * Add 4 Misc Wings (2 inner, 2 outer): Choose alternatingly "RIGHT wing"/"Left wing" on them.
-  * With `applyModes.SET_AFL` (currently default) these wings are only used for their airfoils.
+  * With `applyModes.SET_AFL` (currently default in the configuration file) these wings are only used for their airfoils.
   * With `applyModes.CHANGE_SEMILEN` these wings will actually become active: make sure to set all geometric properties, too.
 * Assign them some airfoils.
 
@@ -148,6 +148,8 @@ airfoils interweaving.
 
 That is Currently not possible because I have not found a DataRef to change lat/long/vert of a wing segment.
 
+Anyways: These wings will actually become active: make sure to set all geometric properties that you want them to have.
+
 Current state: This works well with `sourceModes.SWITCH`.
 
 ##### applyModes.SET_AFL
@@ -158,11 +160,12 @@ On aircraft load, we will first use CHANGE_SEMILEN to deactivate all wings that 
 Then we take the airfoil data from `detents`.`...`.`segments`, possibly interpolate between detents it if we are in `sourceModes.INTERPOLATE`
 and apply it to the target wings.
 
-Configuration: Set `SET_AFL_settings` (see below).
+Configuration: See `SET_AFL_settings` below.
 
-Limitations: The wings we work on as sources or targets needs to
-* only have 1 Re number in the airfoil
-* not use the tip airfoil (only root/mid are possible)
+Limitations: The wings we work on as sources or targets need to
+* only have 1 Re number variant in the airfoil (or you risk that the others are not updated, maybe they are also deleted. Nobody knows. Here be dragons.)
+* not use the tip airfoil (only root/mid are possible) - a workaround might be to select
+  "use midfoil inboard: 1.0" in Plane Maker but this has not been tested well yet.
 
 These limitations come from what is exposed in the DataRefs.
 
@@ -223,6 +226,13 @@ You can increase the log level to 6 (INFO some more output) or 7 (DEBUG) or 8 (E
 
 * changing the DataRef `wingtoggler/logLevel`
 * starting X-Plane with the environment variable `WINGTOGGLER_LOGLEVEL`, for example with `WINGTOGGLER_LOGLEVEL=7 ./X-Plane-x86_64`
+
+## Work needed
+
+That's a little brain dump of questions that need solutions. Ideas are very welcome.
+
+* I have not managed to get totally rid of the default flaps effect in the Pik-20. I wanted to keep the flap deflections to keep the
+  visual model doing its thing. I've tried: Setting the coefficients to 0; Setting the flaps chord lengths to 0
 
 ## Get in touch
 
