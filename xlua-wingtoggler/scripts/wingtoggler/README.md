@@ -44,8 +44,23 @@ Copy the `xlua-wingtoggler/` folder into your `<Aircraft>/plugins/` folder.
 
 That includes an XLua release that this has been tested with.
 
+This has been (only) tested in XP12.
 
+## Quick start
 
+Use it with the wonderful [Pik-20D by danhopgood1](https://forums.x-plane.org/index.php?/files/file/84145-pik-20/).
+
+* (Copy it to a new folder for messing around - should be obvious).
+* Copy this plugin (the folder `xlua-wingtoggler/`) into the `<Aircraft>/plugins/` folder.
+* Open `Pik-20D.acf` in Plane Maker.
+* Add 4 Misc Wings (2 inner, 2 outer): Choose alternatingly "RIGHT wing"/"Left wing" on them.
+  * With `applyModes.SET_AFL` (currently default) these wings are only used for their airfoils.
+  * With `applyModes.CHANGE_SEMILEN` these wings will actually become active: make sure to set all geometric properties, too.
+* Assign them some airfoils.
+
+You'll notice the effect when you move the flaps and see messages in Log.txt.
+
+I suggest a look into `config/wingtoggler-config.lua`.
 
 ## Configuration
 
