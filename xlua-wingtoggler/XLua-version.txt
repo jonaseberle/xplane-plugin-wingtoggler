@@ -1,0 +1,2 @@
+This has been tested with this version:
+https://github.com/X-Plane/XLua/releases/tag/xlua_120r1
