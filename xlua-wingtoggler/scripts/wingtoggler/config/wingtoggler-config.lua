@@ -1,7 +1,7 @@
 --[[
-    You only need change this file for the plane configuration.
+    This is the per-plane configuration for wingtoggler.
 
-    See README.md for an annotated example
+    See README.md for an annotated example.
 ]]
 
 if acfFileName() == 'Pik-20D.acf' then
@@ -16,8 +16,8 @@ if acfFileName() == 'Pik-20D.acf' then
                 }
             },
             apply = {
-                mode = applyModes.SET_AFL, -- or applyModes.CHANGE_SEMILEN,
-                SET_AFL_settings = { -- only needed for applyModes.SET_AFL
+                mode = applyModes.SET_AFL,
+                SET_AFL_settings = {
                     targetSegments = {8, 9, 10, 11},
                 }
             },
@@ -28,9 +28,7 @@ if acfFileName() == 'Pik-20D.acf' then
                 },
                 [1.0] = {
                     name = 'Flaps neut.',
-                    segments = {8, 9, 10, 11, 20, 21, 22, 23},
---                     segments = {8, 9, 10, 11},
---                     segments = {20, 21, 22, 23},
+                    segments = {20, 21, 22, 23},
                 },
                 -- These are all flap positions
 --                 [0.0] = {
